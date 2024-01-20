@@ -1,0 +1,99 @@
+---
+const {idPage, mainTitle, src, alt, href, linkText} = Astro.props;
+---
+
+<header id={idPage}>
+    <div class="header__container">
+        <div class="header__text_container">
+            <h1>
+                {mainTitle}
+            </h1>
+            <p>
+                <slot>
+            </p>
+            <a href={href}>{linkText}</a>
+        </div>
+        <img src={src} alt={alt}>
+    </div>
+</header>
+
+<style>
+    header{
+        min-height: 100dvh;
+        width: 100%;
+        display: grid;
+    }
+    .header__container{
+        display: grid;
+        place-content: center;
+        gap: 1rem;
+        grid-auto-rows: min-content;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 384px),1fr));
+        justify-items: center;
+        padding: 0 5%;
+    }
+    .header__text_container{
+        display: grid;
+        gap: 1rem;
+        grid-auto-rows: max-content;
+        justify-items: center;
+        place-content: center;
+    }
+    h1{
+        text-align: center;
+        color: var(--accent);
+        margin: 1rem 0 0 0;
+    }
+    p{
+        max-width: 480px;
+    }
+    a{
+        text-decoration: none;
+        background: var(--accent);
+        color: #FFFFFF;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        width: max-content;
+        border: 1px solid var(--accent);
+        transition-duration: 300ms;
+    }
+    a:hover{
+        background: #FFFFFF;
+        color: var(--accent);
+    }
+    img{
+        width: 100%;
+        height: 100%;
+        max-width: 480px;
+        border-radius: 8px;
+    }
+    @media (width > 783px) {
+        header{
+            justify-items: left;
+        }
+        .header__container{
+            width: 80%;
+            margin: 0 auto;
+            padding: 0;
+            justify-items: left;
+        }
+        .header__text_container{
+            place-content: unset;
+            justify-items: left;
+            align-content: center;
+        }
+        h1{
+            font-size: 2.5rem;
+            text-align: left;
+            margin: 0;
+        }
+        p{
+            margin: 1rem 0 1rem 0;
+            padding: 0;
+        }
+        
+        img{
+            max-width: 650px;
+        }
+    }
+</style>

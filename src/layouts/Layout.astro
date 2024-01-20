@@ -1,0 +1,71 @@
+---
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+import Navbar from '../components/Navbar.astro';
+import NavItem from '../components/NavItem.astro';
+import { ViewTransitions } from 'astro:transitions';
+---
+
+<!doctype html>
+<html lang="en" transition:animate="slide">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/Logo.png" />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<ViewTransitions />
+	</head>
+	<body>
+		<Navbar
+		src="/Logo.png"
+		alt="logo de la empresa">
+			<NavItem
+			href="/">Inicio</NavItem>
+			<NavItem
+			href="/SectionSampleOne">Servicios</NavItem>
+			<NavItem
+			href="/AboutSampleOne">Info</NavItem>
+		</Navbar>
+		<slot />
+		<div class="heroBg"></div>
+	</body>
+</html>
+<style is:global>
+	:root {
+		--accent: #0099ff;
+		--blur-accent: #0099ff77;
+	}
+	*{
+		font-family: 'Montserrat', sans-serif;
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+	body{
+		position: relative;
+	}
+	h1, h2, h3 {
+		text-wrap: balance;
+	}
+	p{
+		text-wrap: pretty;
+	}
+	.heroBg{
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		height: 100%;
+		width: 100%;
+		background: #FFFFFF;
+		background-image: radial-gradient(circle at 1px 1px, var(--blur-accent) 1px, transparent 1px);
+  		background-size: 16px 16px;
+	}
+</style>

@@ -1,0 +1,92 @@
+---
+import BtnRounded from "./BtnRounded.astro";
+import ResponsiveMenu from "./ResponsiveMenu.astro";
+
+const {src, alt, contactHref} = Astro.props;
+---
+
+<nav transition:animate="none">
+    <div class="navContainer">
+        <div class="logoContainer">
+            <img src={src} alt={alt}>
+        </div>
+        <ul id="menu" class="navItems">
+            <slot>
+        </ul>
+        <div id="callToAction">
+            <BtnRounded
+            href="#">
+                Contacto
+            </BtnRounded>
+        </div>
+        <div id="responsiveMenuContainer">
+            <ResponsiveMenu></ResponsiveMenu>
+        </div>
+    </div>
+</nav>
+
+<style>
+    nav{
+        height: 4rem;
+        width: 100%;
+        display: grid;
+        align-items: center;
+        border-bottom: 1px solid var(--accent);
+        position: absolute;
+        background: #ffffff10;
+        backdrop-filter: blur(4px);
+    }
+    .navContainer{
+        width: 90%;
+        margin: 0 auto;
+        display: grid;
+        grid-auto-flow: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .logoContainer{
+        height: 4rem;
+        padding: 8px 0;
+    }
+    img{
+        height: 100%;
+    }
+    .navItems{
+        display: grid;
+        gap: 1.5rem;
+        position: absolute;
+        inset: 0;
+        top: 4.55rem;
+        background: #ffffffeb;
+        justify-items: center;
+        transform: translateY(-240px);
+        transition: transform 300ms ease-in;
+        height: min-content;
+        padding: 1rem 0;   
+    }
+    #responsiveMenuContainer{
+        display: block;
+    }
+    #callToAction{
+        display: none;
+    }
+    @media (width > 767px) {
+        .navContainer{
+            width: 80%;
+        }
+        .navItems{
+            grid-auto-flow: column;
+            position: unset;
+            background: none;
+            transform: translateY(0);
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        #responsiveMenuContainer{
+            display: none;
+        }
+        #callToAction{
+            display: block;
+        }
+    }
+</style>

@@ -1,0 +1,39 @@
+---
+const {href} = Astro.props;
+---
+<div class="linkContainer">
+    <a href={href}>
+        <slot>
+    </a>
+    <span></span>
+</div>
+
+<style>
+    .linkContainer{
+        position: relative;
+        width: max-content;
+        height: max-content;
+        overflow: hidden;
+        animation-duration: 300ms;   
+    }
+    a{
+        color: currentColor;
+        transition-duration: 300ms;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    a:hover{
+        color: var(--accent);
+    }
+    span {
+        display: block;
+        height: 2px;
+        width: 100%;
+        background: var(--accent);
+        transform: translateX(-100%);
+        transition: transform 500ms ease-in-out;
+    }
+    a:hover + span {
+        transform: translateX(0);
+    }
+</style>
