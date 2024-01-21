@@ -5,7 +5,17 @@ import Layout from "../layouts/Layout.astro";
 <Layout
 title="Section Sample One">
     <section>
-
+        <div class="sectionContainer">
+            <img class="bento_one__pic_one" src="https://img.freepik.com/free-vector/island-with-palm-tree-3d-illustration-cartoon-drawing-land-with-grass-palm-tree-paradise-vacation-3d-style-white-background-traveling-holiday-tourism-adventure-concept_778687-1619.jpg?w=740&t=st=1705814310~exp=1705814910~hmac=2923bca49dac84241ee2419d809bf88f4498ce07e0631b78d27042dc75805582" alt="">
+            <img class="bento_one__pic_two" src="https://img.freepik.com/free-vector/realistic-sand-beach-with-blue-water-sea_107791-24964.jpg?w=740&t=st=1705814390~exp=1705814990~hmac=a7f66f88dede613365cc9fe6e03540f0deccf8725b8e18aa615d2bb50948c774" alt="">
+            <img class="bento_one__pic_three" src="https://img.freepik.com/free-photo/beautiful-paradise-island-with-beach-sea_74190-1023.jpg?w=740&t=st=1705813836~exp=1705814436~hmac=23a052322717bac48b238110ce44fd9c7a7fa98e8d05c00bfe3d8e3d56200dc2" alt="">
+            <img class="bento_two__pic_one" src="https://img.freepik.com/free-photo/vertical-shot-palm-trees-beach-cloudy-sunny-day_181624-55618.jpg?w=740&t=st=1705814114~exp=1705814714~hmac=28adcf7b8df94e014c39b1463f5552e573c4d56596b6f27f95ed04844633ed4a" alt="">
+            <img class="bento_two__pic_two" src="https://img.freepik.com/free-photo/empty-sea-beach-background_74190-313.jpg?w=740&t=st=1705813773~exp=1705814373~hmac=1e958e7b84dd316c622d993cadb5ec924ccb0e6dbbe2058f5a5c55a83b96e220" alt="">
+            <img class="bento_two__pic_three" src="https://img.freepik.com/free-vector/summer-card-collection_23-2148131458.jpg?w=740&t=st=1705814071~exp=1705814671~hmac=c042f92b764a6e79d46d33506686e60d47bbe4bd3284f6c4087820b678910be4" alt="">
+            <img class="bento_three__pic_one" src="https://img.freepik.com/free-vector/people-spending-vacation-beach-taking-photos-making-sandcastle-relaxing-drinking-cocktails-flat-vector-illustration_1284-83402.jpg?w=740&t=st=1705814439~exp=1705815039~hmac=6b8d8e602879bb80263f77e0c6119a9affb87d9a1060c03860b162f5db8a9532" alt="">
+            <img class="bento_three__pic_two" src="https://img.freepik.com/free-photo/woman-posing-beach_1169-61.jpg?1&w=740&t=st=1705813935~exp=1705814535~hmac=ef8d39528a425da7df6041e4ca484a14c0871c2825555ddd6098defebf892152" alt="">
+            <img class="bento_three__pic_three" src="https://img.freepik.com/free-photo/beach-elements-wooden-blue-background_1101-1048.jpg?w=740&t=st=1705814016~exp=1705814616~hmac=060f24b2426af0dbf5f791d7035475bdb4819e99c26d24a56b8e4bd4b9ac7f21" alt="">
+        </div>
     </section>
 </Layout>
 
@@ -13,6 +23,12 @@ title="Section Sample One">
     section{
         min-height: 100dvh;
         width: 100%;
-
+    }
+    .sectionContainer{
+        display: grid;
+        width: 90%;
+        max-width: 67.5rem;
+        grid-template-columns: repeat(4, 1fr);
+        grid-auto-rows: ;
     }
 </style>
