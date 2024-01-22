@@ -4,6 +4,40 @@ import ResponsiveMenu from "./ResponsiveMenu.astro";
 
 const {src, alt, contactHref} = Astro.props;
 ---
+<script>
+	const openMenu = document.getElementById('openMenu');
+	const closeMenu = document.getElementById('closeMenu');
+	const menu = document.getElementById('menu');
+	const navItem = document.querySelectorAll('navItem');
+
+	window.addEventListener('resize', function() {
+        let viewportWidth = window.innerWidth;
+        if (viewportWidth >= 767){
+		    menu.style.transform = 'translateY(0)';
+        } else{
+		    menu.style.transform = 'translateY(-240px)';
+        }
+    });
+	const menuCloser = () =>{
+		closeMenu.style.transform = 'scale(0)';
+		openMenu.style.transform = 'scale(1)';
+		menu.style.transform = 'translateY(-240px)';
+	}
+
+    navItem.forEach(e => {
+        e.addEventListener('click', menuCloser)
+        console.log(e)
+    })
+
+	openMenu.addEventListener('click', ()=>{
+		closeMenu.style.transform = 'scale(1)';
+		openMenu.style.transform = 'scale(0)';
+		menu.style.transform = 'translateY(0)';
+	})
+	closeMenu.addEventListener('click', menuCloser);
+	window.addEventListener('load', menuCloser);
+	window.addEventListener('beforeunload', menuCloser);
+</script>
 
 <nav transition:animate="none">
     <div class="navContainer">
@@ -15,12 +49,32 @@ const {src, alt, contactHref} = Astro.props;
         </ul>
         <div id="callToAction">
             <BtnRounded
-            href="#">
+            href={contactHref}>
                 Contacto
             </BtnRounded>
         </div>
         <div id="responsiveMenuContainer">
-            <ResponsiveMenu></ResponsiveMenu>
+            <div id="btnsMenu">
+                <svg
+                id="openMenu" 
+                width="40" 
+                height="40" 
+                viewBox="0 0 24 24" 
+                stroke-width="2" 
+                stroke="currentColor" 
+                fill="none" 
+                stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4h6v6h-6z" /><path d="M14 4h6v6h-6z" /><path d="M4 14h6v6h-6z" /><path d="M17 17m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /></svg>
+                <svg
+                id="closeMenu" 
+                width="40" 
+                height="40" 
+                viewBox="0 0 24 24" 
+                stroke-width="2" 
+                stroke="currentColor" 
+                fill="none" 
+                stroke-linecap="round" 
+                stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 5a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-14z" /><path d="M9 9l6 6m0 -6l-6 6" /></svg>
+            </div>
         </div>
     </div>
 </nav>
@@ -32,9 +86,9 @@ const {src, alt, contactHref} = Astro.props;
         display: grid;
         align-items: center;
         border-bottom: 1px solid var(--accent);
-        position: absolute;
         background: #ffffff10;
         backdrop-filter: blur(4px);
+        position: fixed;
     }
     .navContainer{
         width: 90%;
@@ -69,6 +123,21 @@ const {src, alt, contactHref} = Astro.props;
     }
     #callToAction{
         display: none;
+    }
+
+    #btnsMenu{
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 100%;
+    }
+    #openMenu, #closeMenu{
+        transform: scale(1);
+        transition: transform 300ms ease-out;
+        grid-column: 1/-1;
+        grid-row: 1/-1;
+    }
+    #closeMenu{
+        transform: scale(0);
     }
     @media (width > 767px) {
         .navContainer{
