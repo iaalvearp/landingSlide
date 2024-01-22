@@ -1,55 +1,25 @@
 ---
 import BtnRounded from "./BtnRounded.astro";
-import ResponsiveMenu from "./ResponsiveMenu.astro";
+import NavItem from '../components/NavItem.astro';
 
-const {src, alt, contactHref} = Astro.props;
 ---
-<script>
-	const openMenu = document.getElementById('openMenu');
-	const closeMenu = document.getElementById('closeMenu');
-	const menu = document.getElementById('menu');
-	const navItem = document.querySelectorAll('navItem');
-
-	window.addEventListener('resize', function() {
-        let viewportWidth = window.innerWidth;
-        if (viewportWidth >= 767){
-		    menu.style.transform = 'translateY(0)';
-        } else{
-		    menu.style.transform = 'translateY(-240px)';
-        }
-    });
-	const menuCloser = () =>{
-		closeMenu.style.transform = 'scale(0)';
-		openMenu.style.transform = 'scale(1)';
-		menu.style.transform = 'translateY(-240px)';
-	}
-
-    navItem.forEach(e => {
-        e.addEventListener('click', menuCloser)
-        console.log(e)
-    })
-
-	openMenu.addEventListener('click', ()=>{
-		closeMenu.style.transform = 'scale(1)';
-		openMenu.style.transform = 'scale(0)';
-		menu.style.transform = 'translateY(0)';
-	})
-	closeMenu.addEventListener('click', menuCloser);
-	window.addEventListener('load', menuCloser);
-	window.addEventListener('beforeunload', menuCloser);
-</script>
 
 <nav transition:animate="none">
     <div class="navContainer">
         <div class="logoContainer">
-            <img src={src} alt={alt}>
+            <img src="/Logo.png" alt="logo de la empresa">
         </div>
         <ul id="menu" class="navItems">
-            <slot>
+            <NavItem
+			href="/">Inicio</NavItem>
+			<NavItem
+			href="/SectionSampleOne">Servicios</NavItem>
+			<NavItem
+			href="/AboutSampleOne">Info</NavItem>
         </ul>
         <div id="callToAction">
             <BtnRounded
-            href={contactHref}>
+            href="#">
                 Contacto
             </BtnRounded>
         </div>
@@ -87,8 +57,9 @@ const {src, alt, contactHref} = Astro.props;
         align-items: center;
         border-bottom: 1px solid var(--accent);
         background: #ffffff10;
-        backdrop-filter: blur(4px);
+        backdrop-filter: blur(8px);
         position: fixed;
+        z-index: 30;
     }
     .navContainer{
         width: 90%;
@@ -119,22 +90,26 @@ const {src, alt, contactHref} = Astro.props;
         padding: 1rem 0;   
     }
     #responsiveMenuContainer{
-        display: block;
+        display: grid;
     }
     #callToAction{
         display: none;
     }
-
+    
     #btnsMenu{
         display: grid;
         grid-template-columns: 100%;
         grid-template-rows: 100%;
+        z-index: 40;
+        height: min-content;
+        width: min-content;
     }
     #openMenu, #closeMenu{
         transform: scale(1);
         transition: transform 300ms ease-out;
         grid-column: 1/-1;
         grid-row: 1/-1;
+        z-index: 100;
     }
     #closeMenu{
         transform: scale(0);
@@ -142,7 +117,7 @@ const {src, alt, contactHref} = Astro.props;
     @media (width > 767px) {
         .navContainer{
             width: 80%;
-            max-width: 1080px;
+            max-width: 1280px;
         }
         .navItems{
             grid-auto-flow: column;
@@ -160,3 +135,43 @@ const {src, alt, contactHref} = Astro.props;
         }
     }
 </style>
+
+<script>
+	const openMenu = document.getElementById('openMenu');
+	const closeMenu = document.getElementById('closeMenu');
+	const menu = document.getElementById('menu');
+    const navItem = document.querySelectorAll('.linkContainer');
+
+    const open = () => {
+        closeMenu.style.transform = 'scale(1)';
+        closeMenu.style.zIndex = '100';
+        openMenu.style.transform = 'scale(0)';
+        openMenu.style.zIndex = '0';
+        menu.style.transform = 'translateY(0)';
+    }
+    const close = () => {
+        closeMenu.style.zIndex = '0';
+        closeMenu.style.transform = 'scale(0)';
+        openMenu.style.zIndex = '100';
+        openMenu.style.transform = 'scale(1)';
+        menu.style.transform = 'translateY(-240px)';
+    }
+    
+	openMenu.addEventListener('click', open);
+	closeMenu.addEventListener('click', close);
+    navItem.forEach(e =>{
+        e.addEventListener('click', ()=>{
+            close()
+        })
+    })
+
+    window.addEventListener('resize', function() {
+        let viewportWidth = window.innerWidth;
+        if (viewportWidth >= 768){
+		    menu.style.transform = 'translateY(0)';
+        } else{
+		    menu.style.transform = 'translateY(-240px)';
+        }
+    });
+
+</script>
